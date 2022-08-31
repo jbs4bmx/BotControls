@@ -1,11 +1,11 @@
-﻿using BotControls.Functions;
-using BotControls.Utilities;
+﻿using BotControls.Utilities;
 using Comfort.Common;
 using EFT;
 using EFT.Bots;
 using EFT.Communications;
 using EFT.UI;
 using spawnscene = EFT.WavesSpawnScenario;
+using activate = BotSpawnerClass;
 using System;
 using System.IO;
 using System.Linq;
@@ -48,6 +48,7 @@ namespace BotControls
         private static int _aiDelaySlide;
         private static int _aiDuration;
         private static int _aiDurationSlide;
+        private object ActivateBotsWithoutWave;
 
         public BotZone bzController { get; private set; }
         private bool IsTargetMethod(MethodInfo mi)
@@ -324,8 +325,9 @@ namespace BotControls
                     // TODO: Add logic here to find changable fields?
                     var bindingFlags = BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public;
 
+                    // Use method ActivateBotWithoutWave?
 
-
+                    var activate = typeof(BotSpawnerClass).GetMethod("TrySpawnFreeInner", bindingFlags);
                     var ignore = typeof(BossLocationSpawn).GetField("IgnoreMaxBots", bindingFlags);
                     var botNum1 = typeof(WildSpawnWave).GetField("slots_min", bindingFlags);
                     var botNum2 = typeof(WildSpawnWave).GetField("slots_max", bindingFlags);
@@ -354,6 +356,9 @@ namespace BotControls
                     // TODO:: Add logic here to set all changes.
                     ignore.SetValue(null, true);
                     botNum1.SetValue(null, _aiAmount);
+                    //ActivateBotsWithoutWave(_aiAmount, null );
+                    // just fucking around trying some new things... maybe I'm on to something?? Or I'm just plain stupid...
+                    GClass572 BotSpawnerClass.TrySpawnFreeInner(_aiAmount, WildSpawnType.assault, true);
                     botNum2.SetValue(null, _aiAmount);
                     botDif.SetValue(null, _aidiftex) ;
                     botwav.SetValue(null, _aiWaves);

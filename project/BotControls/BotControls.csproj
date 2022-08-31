@@ -11,10 +11,10 @@
   
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>..\..\assemblies\0Harmony.dll</HintPath>
+      <HintPath>F:\SPT_AKI\BepInEx\core\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Aki.Common">
-      <HintPath>..\..\assemblies\Aki.Common.dll</HintPath>
+      <HintPath>F:\SPT_AKI\EscapeFromTarkov_Data\Managed\Aki.Common.dll</HintPath>
     </Reference>
     <Reference Include="Aki.Reflection">
       <HintPath>F:\SPT_AKI\EscapeFromTarkov_Data\Managed\Aki.Reflection.dll</HintPath>
@@ -36,10 +36,10 @@
       <HintPath>F:\SPT_AKI\EscapeFromTarkov_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>..\..\assemblies\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>F:\SPT_AKI\EscapeFromTarkov_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>..\..\assemblies\UnityEngine.InputLegacyModule.dll</HintPath>
+      <HintPath>F:\SPT_AKI\EscapeFromTarkov_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   

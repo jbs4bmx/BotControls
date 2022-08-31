@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\livin\\source\\repos\\BotControls\\BotControls\\BotControls.csproj",
+      "projectUniqueName": "C:\\Users\\livin\\OneDrive\\Documents\\GitHub\\BotControls\\project\\BotControls\\BotControls.csproj",
       "projectName": "BotControls",
-      "projectPath": "C:\\Users\\livin\\source\\repos\\BotControls\\BotControls\\BotControls.csproj",
+      "projectPath": "C:\\Users\\livin\\OneDrive\\Documents\\GitHub\\BotControls\\project\\BotControls\\BotControls.csproj",
       "packagesPath": "C:\\Users\\livin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\livin\\source\\repos\\BotControls\\BotControls\\obj\\",
+      "outputPath": "C:\\Users\\livin\\OneDrive\\Documents\\GitHub\\BotControls\\project\\BotControls\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -51,7 +51,7 @@
     "frameworks": {
       "net472": {
         "targetAlias": "net472",
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.303\\RuntimeIdentifierGraph.json"
       }
     }
   }
