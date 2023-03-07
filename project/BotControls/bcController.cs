@@ -271,9 +271,7 @@ namespace BotControls
                     _aiDifficulty = 0x00000004;
                     _aidiftex = "Impossible";
                     break;
-                case 5:
-                    _aiDifficulty = 0x00000005;
-                    _aidiftex = "Random";
+                default:
                     break;
             }
             _aiDifficulty = _aiDifficultySlide;
@@ -354,6 +352,35 @@ namespace BotControls
 
                     // Set the changes ???
                     // TODO:: Add logic here to set all changes.
+
+                    //
+                    //
+                    //
+                    /* -- Look into below function -- */
+                    public static int ToBotAmountSlots(this EBotAmount botDifficulty, int slotsMin, int slotsMax)
+                    {
+                        float num;
+                        switch (botDifficulty)
+                        {
+                            case EBotAmount.NoBots:
+                            case EBotAmount.Low:
+                                num = ((Singleton<BackendConfigSettingsClass>.Instance != null) ? Singleton<BackendConfigSettingsClass>.Instance.WAVE_COEF_LOW : GClass558.Core.WAVE_COEF_LOW);
+                                return (int)(0.5f + (float)slotsMin * num);
+                            case EBotAmount.High:
+                                num = ((Singleton<BackendConfigSettingsClass>.Instance != null) ? Singleton<BackendConfigSettingsClass>.Instance.WAVE_COEF_HIGH : GClass558.Core.WAVE_COEF_HIGH);
+                                return (int)(0.5f + (float)slotsMax * num);
+                            case EBotAmount.Horde:
+                                num = ((Singleton<BackendConfigSettingsClass>.Instance != null) ? Singleton<BackendConfigSettingsClass>.Instance.WAVE_COEF_HORDE : GClass558.Core.WAVE_COEF_HORDE);
+                                return (int)(0.5f + (float)slotsMax * num);
+                        }
+                        num = ((Singleton<BackendConfigSettingsClass>.Instance != null) ? Singleton<BackendConfigSettingsClass>.Instance.WAVE_COEF_MID : GClass558.Core.WAVE_COEF_MID);
+                        return (int)(0.5f + num * (float)(slotsMax - slotsMin) / 2f);
+                    }
+                    /* -- Look into above function -- */
+                    //
+                    //
+                    //
+
                     ignore.SetValue(null, true);
                     botNum1.SetValue(null, _aiAmount);
                     //ActivateBotsWithoutWave(_aiAmount, null );

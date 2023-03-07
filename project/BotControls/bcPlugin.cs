@@ -14,7 +14,7 @@ using UnityEngine;
 
 namespace BotControls
 {
-    [BepInPlugin("com.jbs4bmx.BotControls", "BotControls", "2.3.1")]
+    [BepInPlugin("com.jbs4bmx.BotControls", "BotControls", "350.0.1")]
     public class bcPlugin : BaseUnityPlugin
     {
         public static GameObject Hook;
@@ -24,7 +24,7 @@ namespace BotControls
 
         private void Awake()
         {
-            Logger.LogInfo("Loading: Bot Controls v2.3.1");
+            Logger.LogInfo("Loading: Bot Controls v350.0.1");
             Hook = new GameObject("Bot Controls");
             Hook.AddComponent<bcController>();
             DontDestroyOnLoad(Hook);
