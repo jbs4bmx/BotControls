@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
+using static EFT.SpeedTree.TreeWind;
 
 namespace BotControls
 {
@@ -49,6 +50,7 @@ namespace BotControls
         private static int _aiDuration;
         private static int _aiDurationSlide;
         private object ActivateBotsWithoutWave;
+        public string Difficulty { get; set; }
 
         public BotZone bzController { get; private set; }
         private bool IsTargetMethod(MethodInfo mi)
@@ -120,6 +122,16 @@ namespace BotControls
             });
         }
 
+        public BotRoleAndDiffClass GetBotRoleAndDiffClass(InfoClass info)
+        {
+            var settings = info.GetType().GetField("Settings", BindingFlags.Public | BindingFlags.Instance).GetValue(info);
+
+            var role = settings.GetType().GetField("Role", BindingFlags.Instance | BindingFlags.Public).GetValue(settings).ToString();
+            var diff = settings.GetType().GetField("BotDifficulty", BindingFlags.Instance | BindingFlags.Public).GetValue(settings).ToString();
+
+            return new BotRoleAndDiffClass(string.IsNullOrEmpty(role) ? "" : role, string.IsNullOrEmpty(diff) ? "" : diff);
+        }
+
 
         public void Update()
         {
@@ -184,7 +196,7 @@ namespace BotControls
         {
             // Draws the main outline of the Bot Controls window with title
             if (GUIStatus)
-                windowRect = GUI.Window(0, windowRect, WindowFunction, "Bot Controls v2.3.1 by jbs4bmx");
+                windowRect = GUI.Window(0, windowRect, WindowFunction, "Bot Controls v380.0.1 by jbs4bmx");
         }
 
         void WindowFunction(int BGCWindowID)
@@ -398,5 +410,17 @@ namespace BotControls
             }
             //------------------------------------------------------------------------------------------\\
         }
+    }
+
+    public class BotRoleAndDiffClass
+    {
+        public BotRoleAndDiffClass(string role = "", string difficulty = "")
+        {
+            Role = role;
+            Difficulty = difficulty;
+        }
+
+        public string Role { get; set; }
+        public string Difficulty { get; set; }
     }
 }

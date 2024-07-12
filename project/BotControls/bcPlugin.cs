@@ -1,6 +1,9 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
+using DrakiaXYZ.VersionChecker;
+using System;
 using UnityEngine;
+using static DrakiaXYZ.VersionChecker.VersionChecker;
 
 /* Author: jbs4bmx
  * 
@@ -14,26 +17,72 @@ using UnityEngine;
 
 namespace BotControls
 {
-    [BepInPlugin("com.jbs4bmx.BotControls", "BotControls", "350.0.1")]
+    [BepInPlugin("com.jbs4bmx.BotControls", "BotControls", "380.0.1")]
     public class bcPlugin : BaseUnityPlugin
     {
+        
         public static GameObject Hook;
-
-        private const string SectionName = "Main";
+        public const int TarkovVersion = 29197;
+        private const string SectionName = "Bot Controls by jbs4bmx";
+        
         internal static ConfigEntry<KeyboardShortcut> TogglePanel;
+        public static ConfigEntry<string> RemoveBodies { get; set; }
 
         private void Awake()
         {
-            Logger.LogInfo("Loading: Bot Controls v350.0.1");
+            if (!VersionChecker.CheckEftVersion(Logger, Info, Config))
+            {
+                throw new Exception("Invalid EFT Version");
+            }
+
+            Logger.LogInfo("Loading: Bot Controls v380.0.1");
+
+
             Hook = new GameObject("Bot Controls");
             Hook.AddComponent<bcController>();
             DontDestroyOnLoad(Hook);
 
+            RemoveBodies = Config.Bind(
+                SectionName,
+                "Remove Bodies",
+                "Remove all dead bodies from the map",
+                new ConfigDescription(
+                    "Remove all dead bodies from the map",
+                    null,
+                    new ConfigurationManagerAttributes
+                    {
+                        CustomDrawer = RemoveBodiesButtonDrawer,
+                        Order = 1,
+                    }
+                )
+            );
+
             TogglePanel = Config.Bind(
                 SectionName,
-                "Bot Controls Control Panel Toggle Key",
+                "Open Bot Controls",
                 new KeyboardShortcut(KeyCode.F9),
-                "The keyboard shortcut that toggles bot control panel");
+                "The keyboard shortcut that opens Bot Controls"
+            );
+        }
+
+        private void RemoveBodiesButtonDrawer(ConfigEntryBase entry)
+        {
+            bool button = GUILayout.Button("Remove Bodies", GUILayout.ExpandWidth(true));
+            if (button)
+            {
+                BodyCleanup(true);
+            }
+        }
+        private void BodyCleanup(bool force = false)
+        {
+            if (!force && OnlyInRaid.Value && !GameHelper.IsInGame())
+            {
+                return;
+            }
+
+            Logger.LogInfo("Executing the RAM cleaner");
+
+            _emptyWorkingSetMethod.Invoke(null, null);
         }
     }
 }
